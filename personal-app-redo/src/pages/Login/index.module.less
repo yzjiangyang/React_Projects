@@ -1,0 +1,37 @@
+// @import '~antd/es/style/themes/default.less';
+
+.loginContainer {
+    background: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg') no-repeat;
+    background-position: center 110px;
+    height: 100%;
+    background-size: 100%;
+    .login {
+        padding-top: 200px;
+        width: 368px;
+        margin: 0 auto;
+        :global {
+            .ant-tabs-nav {
+                margin-bottom: 24px;
+                &:before {
+                    border-bottom: none;
+                }
+            }
+            .ant-tabs-nav-list {
+                margin: 0 auto;
+            }
+        }
+    }
+    .icon {
+        margin-left: 16px;
+        font-size: 24px;
+        vertical-align: middle;
+        cursor: pointer;
+        transition: all 0.9;
+        &:hover {
+            color: #000;
+        }
+    }
+    .register {
+        float: right;
+    }
+}
