@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import { Form, Popover, Progress } from 'antd'
+import { Form, Popover, Progress, Select, Row, Col } from 'antd'
+import { Link } from 'react-router-dom'
 import InputItem from '../../components/InputItem'
+import SubmitButton from '../../components/SubmitButton'
 import styles from './index.module.less'
+const { Option } = Select
 const passwordStatusMap = {
     ok: (
         <div>
@@ -27,10 +30,8 @@ const passwordProgressMap = {
 const Register = () => {
     const [visible, setVisible] = useState(false)
     const [popover, setPopover] = useState(false)
+    const [prefix, setPrefix] = useState('86')
     const [form] = Form.useForm()
-    const handleFinish = (value) => {
-        console.log(value)
-    }
     const checkConfirm = (_, value) => {
         const promise = Promise
         if (value && value !== form.getFieldValue('password')) {
@@ -75,6 +76,9 @@ const Register = () => {
                 />
             </div>
         )
+    }
+    const handleFinish = (value) => {
+        console.log(value)
     }
     return (
         <div className={styles.loginRegister}>
@@ -140,6 +144,57 @@ const Register = () => {
                             }
                         ]}
                     />
+                    <Row>
+                        <Col span={6}>
+                            <Select
+                                size="large"
+                                value={prefix}
+                                onChange={(value) => setPrefix(value)}
+                                style={{ width: '100%'}}
+                            >
+                                <Option value="86">+86</Option>
+                                <Option value="87">+87</Option>
+                            </Select>
+                        </Col>
+                        <Col span={18}>
+                            <InputItem
+                                name="mobile"
+                                placeholder="Phone number"
+                                size="large"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please Input Your Phone Number'
+                                    },
+                                    {
+                                        pattern: /^\d{11}$/,
+                                        message: "Not a Valid Phone Number"
+                                    }
+                                ]}
+                            />
+                        </Col>
+                    </Row>
+                    <InputItem
+                        name="captcha"
+                        size="large"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please Enter the Code'
+                            }
+                        ]}
+                        placeholder="Captcha"
+                    />
+                    <Row justify="middle">
+                        <Col span={8}>
+                            <SubmitButton>Signup</SubmitButton>
+                        </Col>
+                        <Col span={16}>
+                            <Link to="/login" className={styles.login}>
+                            Login to an existing account >
+                            </Link>
+                        </Col>
+                    </Row>
                 </Form>
             </div>
         </div>
